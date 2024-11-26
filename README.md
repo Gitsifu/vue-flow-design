@@ -4,7 +4,7 @@
 
 ## 这是什么
 
-这是一个基于 [vue-flow](https://vueflow.dev/) 的 `Vue3` 的流程设计器，支持拖拽、连线、节点编辑、连线编辑等。
+这是一个基于 [vue-flow](https://vueflow.dev/) 的 `Vue3` 的流程设计器，支持拖拽、连线、节点编辑、连线编辑等。可用于流程设计、网络拓扑图编辑等场景。
 
 [Demo](https://gitsifu.github.io/vue-flow-design/)
 
