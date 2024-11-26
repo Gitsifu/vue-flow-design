@@ -8,5 +8,12 @@ export default defineConfig(({mode, command}) => {
         plugins: [
             vue(),
         ],
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    api: 'modern-compiler'
+                }
+            }
+        }
     }
 })
