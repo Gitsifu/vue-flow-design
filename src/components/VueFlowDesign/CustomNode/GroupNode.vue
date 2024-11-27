@@ -1,6 +1,6 @@
 /** * 创建时间：2024/11/25 10:02 星期一 * 文件路径：src/components/FlowGraph/CustomNode/GroupNode.vue * 描述： */
 <template>
-  <div v-if="id" class="vue-flow__group-node" :class="{ 'high-light': data.isHighLight }">
+  <div v-if="id" class="vue-flow__group-node" :class="{ 'high-light': data.isHighLight }" :style="{backgroundColor: data?.style?.backgroundColor}">
     <strong>{{ label }}</strong>
 
     <NodeResizer :is-visible="isVisible" />

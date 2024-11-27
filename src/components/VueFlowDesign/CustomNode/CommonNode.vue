@@ -1,6 +1,6 @@
 /** * 创建时间：2024/10/22 9:56 星期二 * 文件路径：src/views/demo/flow-demo/CustomNode/CommonNode.vue * 描述： */
 <template>
-  <div v-if="id" class="common-box" :class="{'high-light': data.isHighLight}">
+  <div v-if="id" class="common-box" :class="{'high-light': data.isHighLight}" :style="{backgroundColor: data?.style?.backgroundColor}">
     <div class="icon-box">
       <el-icon>
         <IconComponent />
@@ -72,6 +72,7 @@ watch(getSelectedNodes, (selectedNodes) => {
     0px 10px 10px #BBD2FF;
 }
 .common-box {
+  text-align: center;
   width: 100%;
   height: 100%;
   display: flex;
