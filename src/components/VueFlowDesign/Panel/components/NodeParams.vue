@@ -5,7 +5,7 @@
       <el-input v-model="nodeParams.label" @input="handleUpdate" />
     </el-form-item>
     <el-form-item label="背景颜色">
-      <el-color-picker v-model="nodeParams.data.backgroundColor" @change="handleUpdateData" />
+      <el-color-picker v-model="nodeParams.backgroundColor" @change="handleUpdate" />
     </el-form-item>
     <el-form-item label="字体颜色">
       <el-color-picker v-model="nodeParams.color" @change="handleUpdate" />
@@ -36,6 +36,7 @@ const nodeParams = computed(() => {
   return {
     label: props.currentElement.label,
     backgroundColor: props.currentElement.style?.backgroundColor,
+    borderRadius: props.currentElement.style?.borderRadius,
     color: props.currentElement.style?.color,
     fontSize: props.currentElement.style?.fontSize ? Number(props.currentElement.style?.fontSize?.replace('px', '')) : 12,
     height: props.currentElement.style?.height ? Number(props.currentElement.style?.height?.replace('px', '')) : 60,
@@ -55,6 +56,7 @@ function handleUpdate() {
     label: nodeParams.value.label,
     style: {
       backgroundColor: nodeParams.value.backgroundColor,
+      borderRadius: nodeParams.value.borderRadius,
       color: nodeParams.value.color,
       fontSize: nodeParams.value.fontSize + 'px',
       height: nodeParams.value.height + 'px',
@@ -63,13 +65,9 @@ function handleUpdate() {
   });
 }
 
-const handleUpdateData = ()=>{
-  updateNodeData(props.currentElement.id, {
-    style: {
-      backgroundColor: nodeParams.value.data.backgroundColor
-    }
-  });
-}
+// const handleUpdateData = ()=>{
+//   updateNodeData(props.currentElement.id, {});
+// }
 </script>
 
 <style scoped lang="scss"></style>

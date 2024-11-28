@@ -54,6 +54,7 @@ const groupNodeData = {
 }
 
 const style = {
+  borderRadius: '50%',
   fontSize: '12px',
   width: '60px',
   height: '60px'
