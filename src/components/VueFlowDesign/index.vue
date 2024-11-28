@@ -23,7 +23,8 @@
       @edge-update-end="onEdgeUpdateEnd"
       @node-mouse-enter="onNodeMouseEnter"
       @node-mouse-leave="onNodeMouseLeave"
-      @node-drag-stop="nodeDragStop"
+      @node-drag-start="onNodeDragStart"
+      @node-drag-stop="onNodeDragStop"
       @node-click="onNodeClick"
       @pane-click="onPaneClick"
     >
@@ -100,9 +101,20 @@ const props = defineProps({
   }
 })
 
-const { onInit, onNodeDragStop, addEdges, setViewport, toObject, updateEdge, updateNodeData, updateEdgeData } = useVueFlow();
+const { onInit, addEdges, setViewport, toObject, updateEdge, updateNodeData, updateEdgeData } = useVueFlow();
 
 const { onDragOver, onDrop, onDragLeave, isDragOver } = useDragAndDrop();
+
+const edgeStyle = {
+  // 线条颜色
+  stroke: 'red',
+  // 线条宽度
+  strokeWidth: 2,
+  // 动画
+  transition: 'all 0.3s ease-in-out',
+  // 虚线
+  strokeDasharray: '5 5',
+}
 
 const nodes = ref(
   // []
@@ -119,10 +131,6 @@ const dark = ref(false);
 onInit((vueFlowInstance) => {
   // instance is the same as the return of `useVueFlow`
   vueFlowInstance.fitView();
-});
-
-onNodeDragStop(({ event, nodes, node }) => {
-  // console.log('Node Drag Stop', { event, nodes, node });
 });
 
 // onConnect((connection) => {
@@ -224,16 +232,7 @@ const onNodeMouseEnter = ({event, node}) => {
     onUpdateEdge({
       edgeId,
       options: {
-        style: {
-          // 线条颜色
-          stroke: 'red',
-          // 线条宽度
-          strokeWidth: 2,
-          // 动画
-          transition: 'all 0.3s ease-in-out',
-          // 虚线
-          strokeDasharray: '5 5',
-        }
+        style: edgeStyle
     }
     })
   })
@@ -266,8 +265,29 @@ const onPaneClick = (event)=>{
   console.log('画布点击')
 }
 
-const nodeDragStop = ({event, node}) => {
-  // console.log('nodeDragStop1', event, node)
+// 节点拖拽结束
+const onNodeDragStop = ({event, node}) => {
+  getTargetEdges(node.id).forEach(edge => {
+    onUpdateEdge({
+      edgeId: edge.id,
+      options: {
+        style: edgeStyle
+      }
+    })
+  })
+
+}
+
+// 节点拖拽开始
+const onNodeDragStart = ({event, node}) => {
+  getTargetEdges(node.id).forEach(edge => {
+    onUpdateEdge({
+      edgeId: edge.id,
+      options: {
+        style: {}
+      }
+    })
+  })
 }
 </script>
 
